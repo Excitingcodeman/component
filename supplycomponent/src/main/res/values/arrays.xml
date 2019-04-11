@@ -9,10 +9,17 @@
         <item>周六</item>
     </string-array>
     <string-array name="moments">
+        <item>中午</item>
         <item>凌晨</item>
         <item>早上</item>
-        <item>中午</item>
         <item>下午</item>
         <item>晚上</item>
+    </string-array>
+    <string-array name="days">
+        <item>今天</item>
+        <item>昨天</item>
+        <item>明天</item>
+        <item>前天</item>
+        <item>后天</item>
     </string-array>
 </resources>

@@ -6,5 +6,6 @@
     <string name="confirm">确认</string>
     <string name="sure">确定</string>
     <string name="setting">设置</string>
-
+    <string name="money_unit">元</string>
+    <string name="wan_money_unit">万元</string>
 </resources>

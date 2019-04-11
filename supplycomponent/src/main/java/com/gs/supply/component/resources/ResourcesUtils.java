@@ -1,5 +1,6 @@
 package com.gs.supply.component.resources;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -19,35 +20,52 @@ import android.view.View;
 /**
  * @author husky
  * create on 2019/4/11-15:04
+ * 调用之前必须初始化
  */
 public class ResourcesUtils {
+    static ResourcesUtils instance;
+    private static Application mApplication;
+
+    private ResourcesUtils(@NonNull Application baseContext) {
+        mApplication = baseContext;
+    }
+
+    public static void init(@NonNull Application baseContext) {
+        if (instance == null) {
+            synchronized (ResourcesUtils.class) {
+                if (instance == null) {
+                    instance = new ResourcesUtils(baseContext);
+                }
+            }
+        }
+    }
+
+
     /**
      * 获取strings.xml资源文件字符串
      *
-     * @param context 上下文
-     * @param id      资源文件id
+     * @param id 资源文件id
      * @return 资源文件对应字符串
      */
     @NonNull
-    public static String getString(Context context, @StringRes int id) {
-        return context.getApplicationContext().getString(id);
+    public static String getString(@StringRes int id) {
+        return mApplication.getApplicationContext().getString(id);
     }
 
     @NonNull
-    public static String getString(Context context, @StringRes int id, Object... args) {
-        return context.getApplicationContext().getString(id, args);
+    public static String getString(@StringRes int id, Object... args) {
+        return mApplication.getApplicationContext().getString(id, args);
     }
 
     /**
      * 获取strings.xml资源文件字符串数组
      *
-     * @param context 上下文
-     * @param id      资源文件id
+     * @param id 资源文件id
      * @return 资源文件对应字符串数组
      */
     @NonNull
-    public static String[] getStringArray(Context context, @ArrayRes int id) {
-        return context.getApplicationContext().getResources().getStringArray(id);
+    public static String[] getStringArray(@ArrayRes int id) {
+        return mApplication.getApplicationContext().getResources().getStringArray(id);
     }
 
 
@@ -57,13 +75,13 @@ public class ResourcesUtils {
      * @param id 资源文件id
      * @return 资源文件对应图片
      */
-    public static Drawable getDrawable(@NonNull Context context, @DrawableRes int id) {
-        return context.getApplicationContext().getResources().getDrawable(id);
+    public static Drawable getDrawable(@DrawableRes int id) {
+        return mApplication.getApplicationContext().getResources().getDrawable(id);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static Drawable getDrawable(@NonNull Context context, @DrawableRes int id, @Nullable Resources.Theme theme) {
-        return context.getApplicationContext().getResources().getDrawable(id, theme);
+    public static Drawable getDrawable(@DrawableRes int id, @Nullable Resources.Theme theme) {
+        return mApplication.getApplicationContext().getResources().getDrawable(id, theme);
     }
 
 
@@ -73,13 +91,13 @@ public class ResourcesUtils {
      * @param id 资源文件id
      * @return 资源文件对应颜色值
      */
-    public static int getColor(@NonNull Context context, @ColorRes int id) {
-        return context.getApplicationContext().getResources().getColor(id);
+    public static int getColor(@ColorRes int id) {
+        return mApplication.getApplicationContext().getResources().getColor(id);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public static int getColor(@NonNull Context context, @ColorRes int id, @Nullable Resources.Theme theme) {
-        return context.getApplicationContext().getResources().getColor(id, theme);
+    public static int getColor(@ColorRes int id, @Nullable Resources.Theme theme) {
+        return mApplication.getApplicationContext().getResources().getColor(id, theme);
     }
 
 
@@ -90,8 +108,8 @@ public class ResourcesUtils {
      * @return 资源文件对应颜色状态
      */
     @NonNull
-    public static ColorStateList getColorStateList(@NonNull Context context, @ColorRes int id) {
-        return context.getApplicationContext().getResources().getColorStateList(id);
+    public static ColorStateList getColorStateList(@ColorRes int id) {
+        return mApplication.getApplicationContext().getResources().getColorStateList(id);
     }
 
 
@@ -113,8 +131,8 @@ public class ResourcesUtils {
      * @param id 资源文件id
      * @return 资源文件对应像素值
      */
-    public static float getDimension(@NonNull Context context, @DimenRes int id) {
-        return context.getApplicationContext().getResources().getDimension(id);
+    public static float getDimension(@DimenRes int id) {
+        return mApplication.getApplicationContext().getResources().getDimension(id);
     }
 
     /**
@@ -124,8 +142,8 @@ public class ResourcesUtils {
      * @param id 资源文件id
      * @return 资源文件对应像素值
      */
-    public static int getDimensionPixelSize(@NonNull Context context, @DimenRes int id) {
-        return context.getApplicationContext().getResources().getDimensionPixelSize(id);
+    public static int getDimensionPixelSize(@DimenRes int id) {
+        return mApplication.getApplicationContext().getResources().getDimensionPixelSize(id);
     }
 
     /**
