@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="weeks">
+        <item>周日</item>
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周五</item>
+        <item>周六</item>
+    </string-array>
+    <string-array name="moments">
+        <item>凌晨</item>
+        <item>早上</item>
+        <item>中午</item>
+        <item>下午</item>
+        <item>晚上</item>
+    </string-array>
+</resources>

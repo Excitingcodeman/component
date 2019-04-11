@@ -1,0 +1,21 @@
+ext {
+    android = [
+            compileSdkVersion: 26,
+            buildToolsVersion: "28.0.0",
+            minSdkVersion    : 18,
+            targetSdkVersion : 24,
+            versionCode      : 1,
+            versionName      : '1.0.0',
+            VSupportSdk      : '28.0.0',
+
+    ]
+
+    dependencies = [
+            "appcompat-v7"     : "com.android.support:appcompat-v7:${android["VSupportSdk"]}",
+            "support-v4"       : "com.android.support:support-v4:${android["VSupportSdk"]}",
+            "design"           : "com.android.support:design:${android["VSupportSdk"]}",
+            "annotations"      : "com.android.support:support-annotations:${android["VSupportSdk"]}",
+            "recyclerview-v7"  : "com.android.support:recyclerview-v7:${android["VSupportSdk"]}",
+            "constraint-layout": "com.android.support.constraint:constraint-layout:1.1.3"
+    ]
+}

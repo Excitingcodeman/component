@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SupplyComponent</string>
+    <string name="open_notice">开启通知</string>
+    <string name="notifications_tips">如果关闭我们的通知，您可能会错过重要提醒和最新动态信息</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="sure">确定</string>
+    <string name="setting">设置</string>
+
+</resources>
