@@ -3,7 +3,7 @@
 
 ### Manifest merger failed : Attribute provider  解决方案样例  在<provider>标签中添加  tools:replace="android:authorities"语句
  (```)
- <provider
+  <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.gs.component.FileProvider"
             android:exported="false"
