@@ -8,4 +8,5 @@
     <string name="setting">设置</string>
     <string name="money_unit">元</string>
     <string name="wan_money_unit">万元</string>
+    <string name="request_install_packages_tips">请您开启本应用的安装权限，进行更新</string>
 </resources>
