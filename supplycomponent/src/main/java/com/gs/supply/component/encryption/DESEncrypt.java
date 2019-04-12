@@ -71,14 +71,13 @@ public class DESEncrypt {
      * @return 加密后的字节数组
      */
     public static byte[] des3Encode(byte[] data, byte[] key, byte[] keyIv, String type) {
-        Key deskey = null;
         try {
             DESedeKeySpec spec = new DESedeKeySpec(key);
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(ENCRYPTION_MANNER);
-            deskey = secretKeyFactory.generateSecret(spec);
+            Key desKey = secretKeyFactory.generateSecret(spec);
             Cipher cipher = Cipher.getInstance(type);
             IvParameterSpec ivParameterSpec = new IvParameterSpec(keyIv);
-            cipher.init(Cipher.ENCRYPT_MODE, deskey, ivParameterSpec);
+            cipher.init(Cipher.ENCRYPT_MODE, desKey, ivParameterSpec);
             return cipher.doFinal(data);
         } catch (InvalidKeyException e) {
             e.printStackTrace();
@@ -108,14 +107,14 @@ public class DESEncrypt {
      * @return 解密后的字节数组
      */
     public static byte[] des3Decode(byte[] data, byte[] key, byte[] keyIv, String type) {
-        Key deskey = null;
+
         try {
             DESedeKeySpec spec = new DESedeKeySpec(key);
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(ENCRYPTION_MANNER);
-            deskey = secretKeyFactory.generateSecret(spec);
+            Key desKey = secretKeyFactory.generateSecret(spec);
             Cipher cipher = Cipher.getInstance(type);
             IvParameterSpec ivParameterSpec = new IvParameterSpec(keyIv);
-            cipher.init(Cipher.DECRYPT_MODE, deskey, ivParameterSpec);
+            cipher.init(Cipher.DECRYPT_MODE, desKey, ivParameterSpec);
             return cipher.doFinal(data);
         } catch (InvalidKeyException e) {
             e.printStackTrace();

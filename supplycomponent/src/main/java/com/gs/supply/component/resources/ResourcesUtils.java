@@ -1,6 +1,5 @@
 package com.gs.supply.component.resources;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -17,28 +16,15 @@ import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.view.View;
 
+import com.gs.supply.component.Component;
+
 /**
  * @author husky
  * create on 2019/4/11-15:04
  * 调用之前必须初始化
  */
 public class ResourcesUtils {
-    static ResourcesUtils instance;
-    private static Application mApplication;
-
-    private ResourcesUtils(@NonNull Application baseContext) {
-        mApplication = baseContext;
-    }
-
-    public static void init(@NonNull Application baseContext) {
-        if (instance == null) {
-            synchronized (ResourcesUtils.class) {
-                if (instance == null) {
-                    instance = new ResourcesUtils(baseContext);
-                }
-            }
-        }
-    }
+   
 
 
     /**
@@ -49,12 +35,12 @@ public class ResourcesUtils {
      */
     @NonNull
     public static String getString(@StringRes int id) {
-        return mApplication.getApplicationContext().getString(id);
+        return Component.mApplicationContext.getApplicationContext().getString(id);
     }
 
     @NonNull
     public static String getString(@StringRes int id, Object... args) {
-        return mApplication.getApplicationContext().getString(id, args);
+        return Component.mApplicationContext.getApplicationContext().getString(id, args);
     }
 
     /**
@@ -65,7 +51,7 @@ public class ResourcesUtils {
      */
     @NonNull
     public static String[] getStringArray(@ArrayRes int id) {
-        return mApplication.getApplicationContext().getResources().getStringArray(id);
+        return Component.mApplicationContext.getApplicationContext().getResources().getStringArray(id);
     }
 
 
@@ -76,12 +62,12 @@ public class ResourcesUtils {
      * @return 资源文件对应图片
      */
     public static Drawable getDrawable(@DrawableRes int id) {
-        return mApplication.getApplicationContext().getResources().getDrawable(id);
+        return Component.mApplicationContext.getApplicationContext().getResources().getDrawable(id);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static Drawable getDrawable(@DrawableRes int id, @Nullable Resources.Theme theme) {
-        return mApplication.getApplicationContext().getResources().getDrawable(id, theme);
+        return Component.mApplicationContext.getApplicationContext().getResources().getDrawable(id, theme);
     }
 
 
@@ -92,12 +78,12 @@ public class ResourcesUtils {
      * @return 资源文件对应颜色值
      */
     public static int getColor(@ColorRes int id) {
-        return mApplication.getApplicationContext().getResources().getColor(id);
+        return Component.mApplicationContext.getApplicationContext().getResources().getColor(id);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static int getColor(@ColorRes int id, @Nullable Resources.Theme theme) {
-        return mApplication.getApplicationContext().getResources().getColor(id, theme);
+        return Component.mApplicationContext.getApplicationContext().getResources().getColor(id, theme);
     }
 
 
@@ -109,7 +95,7 @@ public class ResourcesUtils {
      */
     @NonNull
     public static ColorStateList getColorStateList(@ColorRes int id) {
-        return mApplication.getApplicationContext().getResources().getColorStateList(id);
+        return Component.mApplicationContext.getApplicationContext().getResources().getColorStateList(id);
     }
 
 
@@ -132,7 +118,7 @@ public class ResourcesUtils {
      * @return 资源文件对应像素值
      */
     public static float getDimension(@DimenRes int id) {
-        return mApplication.getApplicationContext().getResources().getDimension(id);
+        return Component.mApplicationContext.getApplicationContext().getResources().getDimension(id);
     }
 
     /**
@@ -143,7 +129,7 @@ public class ResourcesUtils {
      * @return 资源文件对应像素值
      */
     public static int getDimensionPixelSize(@DimenRes int id) {
-        return mApplication.getApplicationContext().getResources().getDimensionPixelSize(id);
+        return Component.mApplicationContext.getApplicationContext().getResources().getDimensionPixelSize(id);
     }
 
     /**

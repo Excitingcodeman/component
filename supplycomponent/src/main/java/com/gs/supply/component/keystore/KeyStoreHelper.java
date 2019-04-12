@@ -1,15 +1,13 @@
 package com.gs.supply.component.keystore;
 
-import android.app.Application;
 import android.os.Build;
 import android.security.KeyPairGeneratorSpec;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Base64;
-
+import com.gs.supply.component.Component;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,12 +28,10 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.security.auth.x500.X500Principal;
-
 import static com.gs.supply.component.keystore.SecurityConstants.SAMPLE_ALIAS;
 
 
@@ -47,7 +43,7 @@ public class KeyStoreHelper {
     /**
      * 判断是否创建过秘钥
      *
-     * @return
+     * @return true 已经创建  false没有创建
      * @throws KeyStoreException
      * @throws CertificateException
      * @throws NoSuchAlgorithmException
@@ -98,7 +94,7 @@ public class KeyStoreHelper {
      * @throws NoSuchProviderException
      * @throws NoSuchAlgorithmException
      */
-    public static void createKeys(@NonNull Application application) throws InvalidAlgorithmParameterException,
+    public static void createKeys() throws InvalidAlgorithmParameterException,
             NoSuchProviderException, NoSuchAlgorithmException {
 
         //创建一个开始和结束时间,有效范围内的密钥对才会生成。
@@ -109,7 +105,7 @@ public class KeyStoreHelper {
         AlgorithmParameterSpec spec;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             //使用别名来检索的key 。这是一个key 的key !
-            spec = new KeyPairGeneratorSpec.Builder(application)
+            spec = new KeyPairGeneratorSpec.Builder(Component.mApplicationContext)
                     //使用别名来检索的关键。这是一个关键的关键!
                     .setAlias(SAMPLE_ALIAS)
                     // 用于生成自签名证书的主题 X500Principal 接受 RFC 1779/2253的专有名词
@@ -148,10 +144,10 @@ public class KeyStoreHelper {
      * @param needEncryptWord
      * @return
      */
-    public static String encryptString(@NonNull Application application, String needEncryptWord) {
+    public static String encryptString(String needEncryptWord) {
         if (!isHaveKeyStore()) {
             try {
-                createKeys(application);
+                createKeys();
             } catch (InvalidAlgorithmParameterException e) {
                 e.printStackTrace();
             } catch (NoSuchProviderException e) {
@@ -219,10 +215,10 @@ public class KeyStoreHelper {
      * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static String decryptString(@NonNull Application application, String needDecryptWord) {
+    public static String decryptString(String needDecryptWord) {
         if (!isHaveKeyStore()) {
             try {
-                createKeys(application);
+                createKeys();
             } catch (InvalidAlgorithmParameterException e) {
                 e.printStackTrace();
             } catch (NoSuchProviderException e) {
