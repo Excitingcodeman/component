@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">GSComponent</string>
+    <string name="sure">确定</string>
+    <string name="confirm">确认</string>
+    <string name="summit">提交</string>
+    <string name="cancel">取消</string>
+    <string name="update_new_version">正在为您更新版本 ...</string>
+    <string name="have_complete">已完成</string>
+    <string name="percent_sign">%</string>
+    <string name="download_apk_fail">安装包下载失败，请检查网络后重试，多谢！</string>
+    <string name="download_apk_success">安装包下载成功！</string>
+    <string name="install_permissions_tips">请您开启本应用的安装权限，进行更新</string>
+
 </resources>

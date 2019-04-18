@@ -3,4 +3,23 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="home_text_blue">#3B566b</color>
+    <color name="color_FF999999">#FF999999</color>
+    <color name="color_FF666666">#FF666666</color>
+    <color name="color_FF333333">#FF333333</color>
+    <color name="color_FFFFFFFF">#FFFFFFFF</color>
+    <color name="color_FF5078FA">#FF5078FA</color>
+    <color name="color_FFFF5000">#FFFF5000</color>
+    <color name="color_FFD8D8D8">#FFD8D8D8</color>
+    <color name="color_FFE1E1E1">#FFE1E1E1</color>
+    <color name="color_FFE8E8E8">#FFE8E8E8</color>
+    <color name="color_FFF5F5F5">#FFF5F5F5</color>
+    <color name="color_FFF0F0F0">#FFF0F0F0</color>
+    <color name="color_FFFBEDE1">#FFFBEDE1</color>
+    <color name="color_FFFFDE79">#FFFFDE79</color>
+    <color name="color_FFF3D29A">#FFF3D29A</color>
+    <color name="dialog_view_line">#4d4d4d</color>
+    <color name="dialog_text">#030303</color>
+    <color name="investment_wrong_passWord">#0076ff</color>
+    <color name="transparent">#00000000</color>
 </resources>
