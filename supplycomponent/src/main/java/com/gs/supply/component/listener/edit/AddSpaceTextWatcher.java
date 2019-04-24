@@ -124,10 +124,12 @@ public class AddSpaceTextWatcher implements TextWatcher {
 
             String contents = s.toString();
             int length = contents.length();
-            if (length > 0) {
-                iv_delete.setVisibility(View.VISIBLE);
-            } else {
-                iv_delete.setVisibility(View.GONE);
+            if (null!=iv_delete){
+                if (length > 0) {
+                    iv_delete.setVisibility(View.VISIBLE);
+                } else {
+                    iv_delete.setVisibility(View.GONE);
+                }
             }
         }
 
