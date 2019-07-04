@@ -57,32 +57,27 @@ public class KeyStoreHelper {
             //从Android加载密钥对密钥存储库中
             if (Build.VERSION.SDK_INT >= 28) {
                 Key key = ks.getKey(SAMPLE_ALIAS, null);
-                if (key == null) {
-                    return false;
+                if (null !=  key) {
+                    return true;
                 }
             } else {
                 KeyStore.Entry entry = ks.getEntry(SAMPLE_ALIAS, null);
-                if (entry == null) {
-                    return false;
+                if (null != entry) {
+                    return true;
                 }
             }
         } catch (KeyStoreException e) {
             e.printStackTrace();
-            return false;
         } catch (CertificateException e) {
             e.printStackTrace();
-            return false;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return false;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
-        } catch (UnrecoverableEntryException e) {
+        }  catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
+        return false;
     }
 
 
