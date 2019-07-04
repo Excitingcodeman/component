@@ -72,7 +72,7 @@ public class DeviceUtils {
      */
     public static String getMac() {
 
-        String macAddress = null;
+        String macAddress;
         StringBuffer buf = new StringBuffer();
         NetworkInterface networkInterface = null;
         try {
@@ -84,8 +84,10 @@ public class DeviceUtils {
                 return "02:00:00:00:00:02";
             }
             byte[] addr = networkInterface.getHardwareAddress();
-            for (byte b : addr) {
-                buf.append(String.format("%02X:", b));
+            if(null != addr){
+                for (byte b : addr) {
+                    buf.append(String.format("%02X:", b));
+                }
             }
             if (buf.length() > 0) {
                 buf.deleteCharAt(buf.length() - 1);
@@ -95,7 +97,7 @@ public class DeviceUtils {
             e.printStackTrace();
             return "02:00:00:00:00:02";
         }
-        return macAddress == null ? "" : macAddress;
+        return macAddress;
     }
 
     /**
