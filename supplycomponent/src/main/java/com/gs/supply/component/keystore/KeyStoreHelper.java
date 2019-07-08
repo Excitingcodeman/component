@@ -90,7 +90,7 @@ public class KeyStoreHelper {
      * @throws NoSuchAlgorithmException
      */
     public static void createKeys() throws InvalidAlgorithmParameterException,
-            NoSuchProviderException, NoSuchAlgorithmException {
+            NoSuchProviderException, NoSuchAlgorithmException, IllegalStateException {
 
         //创建一个开始和结束时间,有效范围内的密钥对才会生成。
         Calendar start = new GregorianCalendar();
@@ -148,6 +148,8 @@ public class KeyStoreHelper {
             } catch (NoSuchProviderException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (IllegalStateException e) {
                 e.printStackTrace();
             }
         }
@@ -219,6 +221,8 @@ public class KeyStoreHelper {
             } catch (NoSuchProviderException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (IllegalStateException e) {
                 e.printStackTrace();
             }
         }
