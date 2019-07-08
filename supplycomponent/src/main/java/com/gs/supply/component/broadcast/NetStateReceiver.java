@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class NetStateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         mBroadcastReceiver = this;
-        if (ANDROID_NET_CHANGE_ACTION.equalsIgnoreCase(intent.getAction())) {
+        if (!TextUtils.isEmpty(intent.getAction()) && ANDROID_NET_CHANGE_ACTION.equalsIgnoreCase(intent.getAction())) {
             if (!NetUtils.isNetworkAvailable(context)) {
 
                 isNetAvailable = false;
