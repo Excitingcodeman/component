@@ -432,7 +432,7 @@ public class DeviceInfo {
         map.put("mobileNetworkCode", getMobileNetworkCode());
         map.put("batteryLevel", getBatteryLevel());
         map.put("appVersion", getAppVersion());
-        map.put("bundleId", getBundleId());
+//        map.put("bundleId", getBundleId());
         map.put("colorBits", getColorBits());
         map.put("photosNumber", getPhotosNumber());
         map.put("applicationsNumber", getApplicationsNumber());
@@ -451,7 +451,6 @@ public class DeviceInfo {
         map.put("firmwareNum", android.os.Build.VERSION.CODENAME + android.os.Build.VERSION.RELEASE);
         map.put("signMd5", SignUtil.getCertificateMD5());
         map.put("appName", VersionUtils.getPackageInfo().packageName);
-        map.put("appVersion", VersionUtils.getVersionName());
         map.put("deviceType", Build.TYPE);
         map.put("como", Build.BOARD + Build.BOOTLOADER);
         map.put("isOffline", String.valueOf(IsAirModeOn(Component.mApplicationContext)));
