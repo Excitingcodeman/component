@@ -15,7 +15,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 
-    <application android:networkSecurityConfig="@xml/network_security_config">
+    <application
+        android:networkSecurityConfig="@xml/network_security_config">
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.gs.supply.component.FileProvider"
@@ -26,10 +27,10 @@
                 android:resource="@xml/file_path" />
         </provider>
         <activity android:name=".activity.AndroidORequestActivity" />
-        <service android:name=".loaction.SmartLocationService"
-            android:enabled="true"
-            android:exported="false"
-            />
+        <!--<service android:name=".loaction.SmartLocationService"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="false"-->
+            <!--/>-->
 
     </application>
 </manifest>

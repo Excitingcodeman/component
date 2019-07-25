@@ -21,6 +21,11 @@ import android.view.WindowManager;
 import com.gs.supply.component.Component;
 import com.gs.supply.component.resources.VersionUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -84,7 +89,7 @@ public class DeviceUtils {
                 return "02:00:00:00:00:02";
             }
             byte[] addr = networkInterface.getHardwareAddress();
-            if(null != addr){
+            if (null != addr) {
                 for (byte b : addr) {
                     buf.append(String.format("%02X:", b));
                 }
@@ -386,4 +391,93 @@ public class DeviceUtils {
                 ((ip >> 16) & 0xFF) + "." +
                 (ip >> 24 & 0xFF);
     }
+
+
+    /**
+     * BASEBAND-VER
+     * 基带版本
+     * return String
+     */
+
+    public static String getBaseband_Ver() {
+        String Version = "";
+        try {
+            Class cl = Class.forName("android.os.SystemProperties");
+            Object invoker = cl.newInstance();
+            Method m = cl.getMethod("get", new Class[]{String.class, String.class});
+            Object result = m.invoke(invoker, new Object[]{"gsm.version.baseband", "no message"});
+// System.out.println(">>>>>>><<<<<<<" +(String)result);
+            Version = (String) result;
+        } catch (Exception e) {
+        }
+        return Version;
+    }
+
+    /**
+     * CORE-VER
+     * 内核版本
+     * return String
+     */
+
+    public static String getLinuxCore_Ver() {
+        Process process = null;
+        String kernelVersion = "";
+        try {
+            process = Runtime.getRuntime().exec("cat /proc/version");
+        } catch (IOException e) {
+// TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+// get the output line
+        InputStream outs = process.getInputStream();
+        InputStreamReader isrout = new InputStreamReader(outs);
+        BufferedReader brout = new BufferedReader(isrout, 8 * 1024);
+
+
+        String result = "";
+        String line;
+    // get the whole standard output string
+        try {
+            while ((line = brout.readLine()) != null) {
+                result += line;
+            }
+        } catch (IOException e) {
+        // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            if (result != "") {
+                String Keyword = "version ";
+                int index = result.indexOf(Keyword);
+                line = result.substring(index + Keyword.length());
+                index = line.indexOf(" ");
+                kernelVersion = line.substring(0, index);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+        return kernelVersion;
+    }
+
+    /**
+     * INNER-VER
+     * 内部版本
+     * return String
+     */
+
+    public static String getInner_Ver() {
+        String ver = "";
+
+        if (android.os.Build.DISPLAY.contains(android.os.Build.VERSION.INCREMENTAL)) {
+            ver = android.os.Build.DISPLAY;
+        } else {
+            ver = android.os.Build.VERSION.INCREMENTAL;
+        }
+        return ver;
+
+    }
+
 }

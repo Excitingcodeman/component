@@ -24,7 +24,7 @@ dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api rootProject.ext.dependencies["appcompat-v7"]
     api rootProject.ext.dependencies["gson"]
-    api rootProject.ext.dependencies["gms-play-services-location"]
-    api rootProject.ext.dependencies["okhttp3"]
-    api rootProject.ext.dependencies["okhttp3-interceptor"]
+//    api rootProject.ext.dependencies["gms-play-services-location"]
+//    api rootProject.ext.dependencies["okhttp3"]
+//    api rootProject.ext.dependencies["okhttp3-interceptor"]
 }
