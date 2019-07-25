@@ -2,6 +2,7 @@ package com.gs.supply.component.device;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -27,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.gs.supply.component.device.DeviceUtils.IsAirModeOn;
 import static com.gs.supply.component.device.DeviceUtils.getAppVersion;
 import static com.gs.supply.component.device.DeviceUtils.getBaseband_Ver;
 import static com.gs.supply.component.device.DeviceUtils.getBatteryLevel;
@@ -77,6 +79,7 @@ public class DeviceInfo {
         String imsi;
         try {
             if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.READ_PHONE_STATE}, 1000);
                 return "";
             }
             imsi = telephonyManager.getSubscriberId();
@@ -97,6 +100,7 @@ public class DeviceInfo {
         String imei;
         try {
             if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.READ_PHONE_STATE}, 1000);
                 return "";
             }
             imei = telephonyManager.getDeviceId();
@@ -111,6 +115,7 @@ public class DeviceInfo {
         String imei = "";
         try {
             if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.READ_PHONE_STATE}, 1000);
                 return "";
             }
             TelephonyManager tm = (TelephonyManager)
@@ -156,7 +161,7 @@ public class DeviceInfo {
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
+            ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1000);
             return "";
         }
         Location location = locationManager.getLastKnownLocation(provider);
@@ -294,8 +299,9 @@ public class DeviceInfo {
      * @return
      */
     public String getBundleId() {
-        return "";
+        return Build.FINGERPRINT;
     }
+
 
     /**
      * 屏幕颜色位数
@@ -448,6 +454,7 @@ public class DeviceInfo {
         map.put("appVersion", VersionUtils.getVersionName());
         map.put("deviceType", Build.TYPE);
         map.put("como", Build.BOARD + Build.BOOTLOADER);
+        map.put("isOffline", String.valueOf(IsAirModeOn(Component.mApplicationContext)));
         map.put("bootTimeLength", String.valueOf(System.currentTimeMillis() - SystemClock.elapsedRealtime()));
         map.put("bootTime", String.valueOf(SystemClock.elapsedRealtime()));
         String deviceInfo = new Gson().toJson(map);

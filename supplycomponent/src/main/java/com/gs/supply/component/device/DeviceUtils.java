@@ -1,6 +1,8 @@
 package com.gs.supply.component.device;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -16,6 +18,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.gs.supply.component.Component;
@@ -478,6 +481,25 @@ public class DeviceUtils {
         }
         return ver;
 
+    }
+
+
+    public static void setSystemLight(Activity activity, int light) {
+        ContentResolver cr = activity.getContentResolver();
+        Settings.System.putInt(cr, "screen_brightness", light);
+        Window window = activity.getWindow();
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        float flevel = light;
+        attributes.screenBrightness = flevel / 255;
+        float x = attributes.screenBrightness;
+        activity.getWindow().setAttributes(attributes);
+    }
+
+
+
+    public static boolean IsAirModeOn(Context context) {
+        return (Settings.System.getInt(context.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_ON, 0) == 1 ? true : false);
     }
 
 }
