@@ -5,6 +5,11 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.gs.supply.component.Component;
+import com.gs.supply.component.keystore.KeyStoreHelper;
+
+import java.security.InvalidAlgorithmParameterException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 
 /**
  * @author husky
@@ -22,5 +27,16 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Component.init(this);
+        if (!KeyStoreHelper.isHaveKeyStore()){
+            try {
+                KeyStoreHelper.createKeys();
+            } catch (InvalidAlgorithmParameterException e) {
+                e.printStackTrace();
+            } catch (NoSuchProviderException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

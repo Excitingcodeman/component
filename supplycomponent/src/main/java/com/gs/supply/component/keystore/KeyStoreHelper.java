@@ -7,7 +7,9 @@ import android.security.keystore.KeyProperties;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Base64;
+
 import com.gs.supply.component.Component;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,10 +30,13 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.security.auth.x500.X500Principal;
+
 import static com.gs.supply.component.keystore.SecurityConstants.SAMPLE_ALIAS;
 
 
@@ -57,7 +62,7 @@ public class KeyStoreHelper {
             //从Android加载密钥对密钥存储库中
             if (Build.VERSION.SDK_INT >= 28) {
                 Key key = ks.getKey(SAMPLE_ALIAS, null);
-                if (null !=  key) {
+                if (null != key) {
                     return true;
                 }
             } else {
@@ -74,7 +79,7 @@ public class KeyStoreHelper {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -92,6 +97,8 @@ public class KeyStoreHelper {
     public static void createKeys() throws InvalidAlgorithmParameterException,
             NoSuchProviderException, NoSuchAlgorithmException, IllegalStateException {
 
+        Locale aDefault = Locale.getDefault();
+        Locale.setDefault(Locale.ENGLISH);
         //创建一个开始和结束时间,有效范围内的密钥对才会生成。
         Calendar start = new GregorianCalendar();
         Calendar end = new GregorianCalendar();
@@ -131,6 +138,7 @@ public class KeyStoreHelper {
                         SecurityConstants.KEYSTORE_PROVIDER_ANDROID_KEYSTORE);
         kpGenerator.initialize(spec);
         kpGenerator.generateKeyPair();
+        Locale.setDefault(aDefault);
     }
 
     /**
