@@ -365,42 +365,6 @@ public class DeviceInfo {
      * @return
      */
     public String getDeviceInfo() {
-//        StringBuffer strDeviceInfo = new StringBuffer();
-//        strDeviceInfo.append("{");
-//        strDeviceInfo.append("\"appRandom\":" + "\"" + DeviceUtils.getAppRandom() + "\",");
-//        strDeviceInfo.append("\"imsi\":" + "\"" + getImsi() + "\",");
-//        strDeviceInfo.append("\"mac\":" + "\"" + getMac() + "\",");
-//        strDeviceInfo.append("\"imei\":" + "\"" + getImei() + "\",");
-//        strDeviceInfo.append("\"country\":" + "\"" + getCountry() + "\",");
-//        strDeviceInfo.append("\"language\":" + "\"" + getLanguage() + "\",");
-//        strDeviceInfo.append("\"timeZone\":" + "\"" + getTimeZone() + "\",");
-//        strDeviceInfo.append("\"locationLat\":" + "\"" + getLocation("1") + "\",");
-//        strDeviceInfo.append("\"locationLon\":" + "\"" + getLocation("2") + "\",");
-//        strDeviceInfo.append("\"locationType\":" + "\"" + getLocationType() + "\",");
-//        strDeviceInfo.append("\"osName\":" + "\"" + getOsName() + "\",");
-//        strDeviceInfo.append("\"osVersion\":" + "\"" + getOsVersion() + "\",");
-//        strDeviceInfo.append("\"isRoot\":" + "\"" + isRoot() + "\",");
-//        strDeviceInfo.append("\"gmtTime\":" + "\"" + getGmtTime() + "\",");
-//        strDeviceInfo.append("\"size\":" + "\"" + getSize() + "\",");
-//        strDeviceInfo.append("\"resolution\":" + "\"" + getResolution() + "\",");
-//        strDeviceInfo.append("\"brand\":" + "\"" + getBrand() + "\",");
-//        strDeviceInfo.append("\"phoneModel\":" + "\"" + getPhoneModel() + "\",");
-//        strDeviceInfo.append("\"wifi\":" + "\"" + getWifi() + "\",");
-//        strDeviceInfo.append("\"wifiMac\":" + "\"" + getWifiMac() + "\",");
-//        strDeviceInfo.append("\"baseStnInfo\":" + "\"" + getBaseStnInfo() + "\",");
-//        strDeviceInfo.append("\"baseStnLocation\":" + "\"" + getBaseStnLocation() + "\",");
-//        strDeviceInfo.append("\"serialNumber\":" + "\"" + getSerialNumber() + "\",");
-//        strDeviceInfo.append("\"deviceNum\":" + "\"" + SharedPreferencesUtil.getInstance().getString("device_Id", "") + "\",");
-//        strDeviceInfo.append("\"supportTouchscreen\":" + "\"" + isSupportTouchscreen() + "\",");
-//        strDeviceInfo.append("\"mobileCountryCode\":" + "\"" + getMobileCountryCode() + "\",");
-//        strDeviceInfo.append("\"mobileNetworkCode\":" + "\"" + getMobileNetworkCode() + "\",");
-//        strDeviceInfo.append("\"batteryLevel\":" + "\"" + getBatteryLevel() + "\",");
-//        strDeviceInfo.append("\"appVersion\":" + "\"" + getAppVersion() + "\",");
-//        strDeviceInfo.append("\"bundleId\":" + "\"" + getBundleId() + "\",");
-//        strDeviceInfo.append("\"colorBits\":" + "\"" + getColorBits() + "\",");
-//        strDeviceInfo.append("\"photosNumber\":" + "\"" + getPhotosNumber() + "\",");
-//        strDeviceInfo.append("\"applicationsNumber\":" + "\"" + getApplicationsNumber() + "\"");
-//        strDeviceInfo.append("}");
         Map<String, String> map = new HashMap<>();
         map.put("appRandom", DeviceUtils.getAppRandom());
         map.put("imsi", getImsi());
@@ -426,13 +390,68 @@ public class DeviceInfo {
         map.put("baseStnInfo", getBaseStnInfo());
         map.put("baseStnLocation", getBaseStnLocation());
         map.put("serialNumber", getSerialNumber());
-        map.put("deviceNum", getSerialNumber());
         map.put("supportTouchscreen", String.valueOf(isSupportTouchscreen()));
         map.put("mobileCountryCode", getMobileCountryCode());
         map.put("mobileNetworkCode", getMobileNetworkCode());
         map.put("batteryLevel", getBatteryLevel());
         map.put("appVersion", getAppVersion());
-//        map.put("bundleId", getBundleId());
+        map.put("colorBits", getColorBits());
+        map.put("photosNumber", getPhotosNumber());
+        map.put("applicationsNumber", getApplicationsNumber());
+        map.put("deviceModel", Build.DEVICE);
+        map.put("platform", Build.HARDWARE);
+        map.put("networkType", NetUtils.getAPNType(mContext));
+        map.put("dataNetworkIp", getIPAddress());
+        map.put("cpuMaxFrequency", CpuManager.getMaxCpuFreq());
+        map.put("memory", RoomSizeManager.getRamMemory()[0] + "");
+        map.put("totalSpace", RoomSizeManager.getRomMemory()[0] + "");
+        map.put("freeSpace", RoomSizeManager.getRomMemory()[1] + "");
+        map.put("gpsSwitch", String.valueOf(gpsIsOpen()));
+        map.put("basebandVersion", getBaseband_Ver());
+        map.put("productInternalCode", getInner_Ver());
+        map.put("romTags", Build.TAGS);
+        map.put("firmwareNum", android.os.Build.VERSION.CODENAME + android.os.Build.VERSION.RELEASE);
+        map.put("signMd5", SignUtil.getCertificateMD5());
+        map.put("appName", VersionUtils.getPackageInfo().packageName);
+        map.put("deviceType", Build.TYPE);
+        map.put("como", Build.BOARD + Build.BOOTLOADER);
+        map.put("isOffline", String.valueOf(IsAirModeOn(Component.mApplicationContext)));
+        map.put("bootTimeLength", String.valueOf(System.currentTimeMillis() - SystemClock.elapsedRealtime()));
+        map.put("bootTime", String.valueOf(SystemClock.elapsedRealtime()));
+        String deviceInfo = new Gson().toJson(map);
+        Log.d(TAG, deviceInfo);
+        return deviceInfo;
+    }
+
+    /**
+     * 获取设备信息
+     *
+     * @return
+     */
+    public String getDeviceInfoNoLocation() {
+        Map<String, String> map = new HashMap<>();
+        map.put("appRandom", DeviceUtils.getAppRandom());
+        map.put("mac", getMac());
+        map.put("country", getCountry());
+        map.put("language", getLanguage());
+        map.put("timeZone", getTimeZone());
+        map.put("locationType", getLocationType());
+        map.put("osName", getOsName());
+        map.put("osVersion", getOsVersion());
+        map.put("isRoot", String.valueOf(isRoot()));
+        map.put("gmtTime", getGmtTime());
+        map.put("size", getSize());
+        map.put("resolution", getResolution());
+        map.put("brand", getBrand());
+        map.put("phoneModel", getPhoneModel());
+        map.put("wifi", getWifi());
+        map.put("wifiMac", getWifiMac());
+        map.put("serialNumber", getSerialNumber());
+        map.put("supportTouchscreen", String.valueOf(isSupportTouchscreen()));
+        map.put("mobileCountryCode", getMobileCountryCode());
+        map.put("mobileNetworkCode", getMobileNetworkCode());
+        map.put("batteryLevel", getBatteryLevel());
+        map.put("appVersion", getAppVersion());
         map.put("colorBits", getColorBits());
         map.put("photosNumber", getPhotosNumber());
         map.put("applicationsNumber", getApplicationsNumber());
