@@ -173,12 +173,8 @@ public class DeviceUtils {
      *
      * @return
      */
-    @SuppressLint("SimpleDateFormat")
     public static String getGmtTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-        //获取当前时间
-        Date curDate = new Date(System.currentTimeMillis());
-        return formatter.format(curDate) == null ? "" : formatter.format(curDate);
+        return String.valueOf(System.currentTimeMillis());
     }
 
     /**
@@ -441,13 +437,13 @@ public class DeviceUtils {
 
         String result = "";
         String line;
-    // get the whole standard output string
+        // get the whole standard output string
         try {
             while ((line = brout.readLine()) != null) {
                 result += line;
             }
         } catch (IOException e) {
-        // TODO Auto-generated catch block
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -494,7 +490,6 @@ public class DeviceUtils {
         float x = attributes.screenBrightness;
         activity.getWindow().setAttributes(attributes);
     }
-
 
 
     public static boolean IsAirModeOn(Context context) {

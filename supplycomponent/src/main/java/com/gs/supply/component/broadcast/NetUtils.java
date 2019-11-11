@@ -32,7 +32,9 @@ public class NetUtils {
                 if (null != networks) {
                     for (Network mNetwork : networks) {
                         networkInfo = mgr.getNetworkInfo(mNetwork);
-                        if (null != networkInfo && networkInfo.getState().equals(NetworkInfo.State.CONNECTED)) {
+                        if (null != networkInfo
+                                &&null!=networkInfo.getState()
+                                && networkInfo.getState().equals(NetworkInfo.State.CONNECTED)) {
                             return true;
                         }
                     }
@@ -41,7 +43,9 @@ public class NetUtils {
                 NetworkInfo[] info = mgr.getAllNetworkInfo();
                 if (info != null) {
                     for (NetworkInfo networkInfo : info) {
-                        if (null != networkInfo && networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                        if (null != networkInfo
+                                &&null!=networkInfo.getState()
+                                &&networkInfo.getState() == NetworkInfo.State.CONNECTED) {
                             return true;
                         }
                     }

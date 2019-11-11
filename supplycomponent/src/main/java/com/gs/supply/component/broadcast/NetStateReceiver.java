@@ -37,15 +37,17 @@ public class NetStateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         mBroadcastReceiver = this;
-        if (!TextUtils.isEmpty(intent.getAction()) && ANDROID_NET_CHANGE_ACTION.equalsIgnoreCase(intent.getAction())) {
-            if (!NetUtils.isNetworkAvailable(context)) {
-
-                isNetAvailable = false;
-            } else {
-                isNetAvailable = true;
-                mNetType = NetUtils.getAPNType(context);
+        if (null != intent) {
+            if (!TextUtils.isEmpty(intent.getAction())
+                    && ANDROID_NET_CHANGE_ACTION.equalsIgnoreCase(intent.getAction())) {
+                if (!NetUtils.isNetworkAvailable(context)) {
+                    isNetAvailable = false;
+                } else {
+                    isNetAvailable = true;
+                    mNetType = NetUtils.getAPNType(context);
+                }
+                notifyObserver();
             }
-            notifyObserver();
         }
     }
 
