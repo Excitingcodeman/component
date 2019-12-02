@@ -33,7 +33,7 @@ public class NetUtils {
                     for (Network mNetwork : networks) {
                         networkInfo = mgr.getNetworkInfo(mNetwork);
                         if (null != networkInfo
-                                &&null!=networkInfo.getState()
+                                && null != networkInfo.getState()
                                 && networkInfo.getState().equals(NetworkInfo.State.CONNECTED)) {
                             return true;
                         }
@@ -44,8 +44,8 @@ public class NetUtils {
                 if (info != null) {
                     for (NetworkInfo networkInfo : info) {
                         if (null != networkInfo
-                                &&null!=networkInfo.getState()
-                                &&networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                                && null != networkInfo.getState()
+                                && networkInfo.getState() == NetworkInfo.State.CONNECTED) {
                             return true;
                         }
                     }
@@ -139,6 +139,7 @@ public class NetUtils {
         int nType = networkInfo.getType();
 
         if (nType == ConnectivityManager.TYPE_MOBILE) {
+            if (null == networkInfo.getExtraInfo()) return NetTypeConfig.NONE_TYPE;
             if (networkInfo.getExtraInfo().toLowerCase(Locale.getDefault()).equals("cmnet")) {
                 return NetTypeConfig.CMNET_TYPE;
             } else {
